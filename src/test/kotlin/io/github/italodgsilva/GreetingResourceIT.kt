@@ -1,4 +1,4 @@
-package org.example
+package io.github.italodgsilva
 
 import io.quarkus.test.junit.QuarkusIntegrationTest
 
