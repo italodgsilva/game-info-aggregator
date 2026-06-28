@@ -1,0 +1,6 @@
+# URL do cliente REST
+quarkus.rest-client.rawg-api.url=https://api.rawg.io/api
+
+# Sua chave da RAWG
+rawg.api-key=yourapikey
+
