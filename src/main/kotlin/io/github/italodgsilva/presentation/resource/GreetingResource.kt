@@ -1,4 +1,4 @@
-package io.github.italodgsilva
+package io.github.italodgsilva.presentation.resource
 
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.Path

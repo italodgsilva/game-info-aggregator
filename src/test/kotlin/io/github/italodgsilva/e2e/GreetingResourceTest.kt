@@ -1,8 +1,8 @@
-package io.github.italodgsilva
+package io.github.italodgsilva.e2e
 
 import io.quarkus.test.junit.QuarkusTest
-import io.restassured.RestAssured.given
-import org.hamcrest.CoreMatchers.`is`
+import io.restassured.RestAssured
+import org.hamcrest.CoreMatchers
 import org.junit.jupiter.api.Test
 
 @QuarkusTest
@@ -10,11 +10,11 @@ class GreetingResourceTest {
 
     @Test
     fun testHelloEndpoint() {
-        given()
+        RestAssured.given()
           .`when`().get("/hello")
           .then()
              .statusCode(200)
-             .body(`is`("Olá a partir do Quarkus"))
+             .body(CoreMatchers.`is`("Olá a partir do Quarkus"))
     }
 
 }
