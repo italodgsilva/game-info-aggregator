@@ -2,9 +2,24 @@ package io.github.italodgsilva.infra.gateway
 
 import io.github.italodgsilva.domain.entity.Game
 import io.github.italodgsilva.domain.gateway.GameGateway
+import io.github.italodgsilva.infra.client.RawgApiClient
+import io.github.italodgsilva.infra.client.RawgMapper
+import jakarta.enterprise.context.ApplicationScoped
+import org.eclipse.microprofile.config.inject.ConfigProperty
+import org.eclipse.microprofile.rest.client.inject.RestClient
 
-class RawgGameGateway : GameGateway {
+@ApplicationScoped
+class RawgGameGateway(
+    @RestClient
+    private val client: RawgApiClient,
+
+    @ConfigProperty(name = "rawg.api-key")
+    private val apiKey: String
+
+) : GameGateway {
     override suspend fun find(name: String): Game? {
-        TODO("not yet implemented")
+        val response = client.search(name, this.apiKey)
+        response.results.ifEmpty { return null }
+        return RawgMapper.toDomain(response.results[0])
     }
 }
