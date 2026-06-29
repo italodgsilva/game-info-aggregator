@@ -13,7 +13,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import kotlin.uuid.Uuid
+import java.util.*
 
 class GetGameInfoByNameUseCaseTest {
 
@@ -24,7 +24,7 @@ class GetGameInfoByNameUseCaseTest {
     fun `must return a game info when it is found`() = runTest {
 
         val game = Game(
-            uuid = Uuid.random(),
+            uuid = UUID.randomUUID(),
             name = "Elden Ring",
             description = "Description of Elden Ring",
             genres = listOf("Action", "RPG")

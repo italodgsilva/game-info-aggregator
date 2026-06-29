@@ -1,7 +1,7 @@
 package io.github.italodgsilva.domain.entity
 
-import kotlin.uuid.Uuid
+import java.util.*
 
 interface Entity {
-    val uuid: Uuid
+    val uuid: UUID
 }
