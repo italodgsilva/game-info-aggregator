@@ -1,9 +1,9 @@
-package io.github.italodgsilva.infra.gateway
+package io.github.italodgsilva.infra.rawg.gateway
 
 import io.github.italodgsilva.domain.entity.Game
 import io.github.italodgsilva.domain.gateway.GameGateway
-import io.github.italodgsilva.infra.client.RawgApiClient
-import io.github.italodgsilva.infra.client.RawgMapper
+import io.github.italodgsilva.infra.rawg.client.RawgApiClient
+import io.github.italodgsilva.infra.rawg.mapper.RawgMapper
 import jakarta.enterprise.context.ApplicationScoped
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.eclipse.microprofile.rest.client.inject.RestClient
