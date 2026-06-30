@@ -2,9 +2,9 @@ package io.github.italodgsilva.unit.application.usecase
 
 import io.github.italodgsilva.application.usecase.game.getgameinfobyname.GetGameInfoByNameInput
 import io.github.italodgsilva.application.usecase.game.getgameinfobyname.GetGameInfoByNameUseCase
-import io.github.italodgsilva.domain.entity.Game
 import io.github.italodgsilva.domain.exception.GameNotFoundException
 import io.github.italodgsilva.domain.provider.GameProvider
+import io.github.italodgsilva.support.factory.GameFactory
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -13,7 +13,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.util.*
 
 class GetGameInfoByNameUseCaseTest {
 
@@ -23,24 +22,19 @@ class GetGameInfoByNameUseCaseTest {
     @Test
     fun `must return a game info when it is found`() = runTest {
 
-        val game = Game(
-            uuid = UUID.randomUUID(),
-            name = "Elden Ring",
-            description = "Description of Elden Ring",
-            genres = listOf("Action", "RPG")
-        )
-
+        val game = GameFactory.create()
         coEvery {
-            provider.findByName("Elden Ring")
+            provider.findByName(game.name)
         } returns game
 
-        val output = useCase.execute(GetGameInfoByNameInput("Elden Ring"))
+        val output = useCase.execute(GetGameInfoByNameInput(game.name))
+
         assertEquals(game.name, output.name)
         assertEquals(game.description, output.description)
         assertEquals(game.genres, output.genres)
 
         coVerify(exactly = 1) {
-            provider.findByName("Elden Ring")
+            provider.findByName(game.name)
         }
     }
 

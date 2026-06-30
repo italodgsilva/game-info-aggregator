@@ -1,9 +1,9 @@
 package io.github.italodgsilva.unit.application.provider
 
 import io.github.italodgsilva.application.provider.DefaultGameProvider
-import io.github.italodgsilva.domain.entity.Game
 import io.github.italodgsilva.domain.gateway.GameGateway
 import io.github.italodgsilva.domain.repository.GameRepository
+import io.github.italodgsilva.support.factory.GameFactory
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -11,7 +11,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertNull
-import java.util.*
 
 class DefaultGameProviderTest {
 
@@ -21,12 +20,7 @@ class DefaultGameProviderTest {
     @Test
     fun `must provide a game by name when it found`() = runTest {
 
-        val game = Game(
-            uuid = UUID.randomUUID(),
-            name = "Elden Ring",
-            description = "Description of Elden Ring",
-            genres = listOf("Action", "RPG")
-        )
+        val game = GameFactory.create()
 
         // TODO Quando implementarmos o repositório, devemos definir o comportamento dele aqui
         coEvery {

@@ -55,7 +55,7 @@ class RawgMapperTest {
         val rawgGameResponse = RawgGameResponse(
             name = "Elden Ring",
             description = "Description of Elden Ring",
-            genres = listOf<RawgGenreResponse>()
+            genres = emptyList()
         )
 
         val game = RawgMapper.toDomain(rawgGameResponse)
