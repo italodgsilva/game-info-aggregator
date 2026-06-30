@@ -19,6 +19,9 @@ jobs:
           java-version: 21
           cache: maven
 
+      - name: Give execute permission
+        run: chmod +x mvnw
+
       - name: Run JVM tests
         run: ./mvnw test
 
@@ -35,6 +38,9 @@ jobs:
           distribution: temurin
           java-version: 21
           cache: maven
+
+      - name: Give execute permission
+        run: chmod +x mvnw
 
       - name: Run native tests
         run: |
