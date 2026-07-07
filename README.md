@@ -9,7 +9,7 @@ Este projeto é um projeto pessoal para fins de aprendizado, que faz uso das seg
 
 Se quiser saber mais sobre o Quarkus, visite: <https://quarkus.io/>.
 
-Trata-se de um agregador de informações de jogos, uma API que recebe o nome de um jogo e retorna informações vindas de 
+Trata-se de um agregador de informações de jogos, uma API que recebe o nome de um jogo e retorna informações vindas de
 múltiplas fontes.
 
 > __PROJETO AINDA EM DESENVOLVIMENTO!!!__
@@ -22,7 +22,7 @@ múltiplas fontes.
 ./mvnw quarkus:dev
 ```
 
-> **_OBSERVAÇÃO:_**  O Quarkus vem com uma UI de desenvolvimento, acessível somente pelo modo de desenvolvimento no 
+> **_OBSERVAÇÃO:_**  O Quarkus vem com uma UI de desenvolvimento, acessível somente pelo modo de desenvolvimento no
 > seguinte link:  <http://localhost:8080/q/dev/>.
 
 ## Empacotando e executando a aplicação
@@ -77,3 +77,10 @@ Agora é possível rodar o executável através do seguinte comando: `./target/h
 > SO.
 
 Se quiser saber mais sobre a criação de executáveis nativos, por favor, consulte <https://quarkus.io/guides/maven-tooling>.
+
+## Qualidade
+
+- Spotless
+- Detekt
+- JaCoCo (cobertura mínima: 70%)
+- GitHub Actions
