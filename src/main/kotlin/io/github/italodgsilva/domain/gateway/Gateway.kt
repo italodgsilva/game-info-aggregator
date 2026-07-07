@@ -1,4 +1,3 @@
 package io.github.italodgsilva.domain.gateway
 
-interface Gateway {
-}
+interface Gateway

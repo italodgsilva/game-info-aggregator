@@ -3,36 +3,36 @@ package io.github.italodgsilva.support.factory
 import io.github.italodgsilva.domain.entity.Game
 import io.github.serpro69.kfaker.Faker
 import io.github.serpro69.kfaker.games.GamesFaker
-import java.util.*
+import java.util.UUID
 
 object GameFactory {
-
     private val faker = Faker()
     private val gamesFaker = GamesFaker()
 
-    private val availableGenres = listOf(
-        "Action",
-        "Adventure",
-        "RPG",
-        "Shooter",
-        "Strategy",
-        "Simulation",
-        "Puzzle",
-        "Sports",
-        "Racing",
-        "Indie"
-    )
+    private val availableGenres =
+        listOf(
+            "Action",
+            "Adventure",
+            "RPG",
+            "Shooter",
+            "Strategy",
+            "Simulation",
+            "Puzzle",
+            "Sports",
+            "Racing",
+            "Indie",
+        )
 
     fun create(
         uuid: UUID = UUID.randomUUID(),
         name: String = gamesFaker.game.title(),
         description: String = "Description ${faker.random.nextUUID()}",
-        genres: List<String> = randomGenres()
-    ) =  Game(
+        genres: List<String> = randomGenres(),
+    ) = Game(
         uuid = uuid,
         name = name,
         description = description,
-        genres = genres
+        genres = genres,
     )
 
     private fun randomGenres(): List<String> {
@@ -41,5 +41,4 @@ object GameFactory {
             .shuffled()
             .take(size)
     }
-
 }

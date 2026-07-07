@@ -12,15 +12,14 @@ import jakarta.ws.rs.Produces
 import jakarta.ws.rs.core.MediaType
 
 @Path("/games")
-class GameResource (
-    private val useCase: GetGameInfoByNameUseCase
+class GameResource(
+    private val useCase: GetGameInfoByNameUseCase,
 ) {
-
     @GET
     @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     suspend fun getGameInfoByName(
-        @PathParam("name") name: String
+        @PathParam("name") name: String,
     ): GetGameInfoByNameResponse {
         val input: GetGameInfoByNameInput = GameResourceMapper.toInput(name)
         val output: GetGameInfoByNameOutput = useCase.execute(input)

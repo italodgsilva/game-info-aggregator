@@ -1,4 +1,3 @@
 package io.github.italodgsilva.domain.repository
 
-interface GameRepository : Repository {
-}
+interface GameRepository : Repository

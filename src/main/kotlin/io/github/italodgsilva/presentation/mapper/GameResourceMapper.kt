@@ -5,16 +5,12 @@ import io.github.italodgsilva.application.usecase.game.getgameinfobyname.GetGame
 import io.github.italodgsilva.presentation.response.game.GetGameInfoByNameResponse
 
 object GameResourceMapper {
+    fun toInput(name: String) = GetGameInfoByNameInput(name)
 
-    fun toInput(
-        name: String
-    ) = GetGameInfoByNameInput(name)
-
-    fun toResponse(
-        output: GetGameInfoByNameOutput
-    ) = GetGameInfoByNameResponse(
-        name = output.name,
-        description = output.description,
-        genres = output.genres
-    )
+    fun toResponse(output: GetGameInfoByNameOutput) =
+        GetGameInfoByNameResponse(
+            name = output.name,
+            description = output.description,
+            genres = output.genres,
+        )
 }

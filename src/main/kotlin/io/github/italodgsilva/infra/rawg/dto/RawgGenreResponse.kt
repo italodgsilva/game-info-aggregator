@@ -4,5 +4,5 @@ import io.quarkus.runtime.annotations.RegisterForReflection
 
 @RegisterForReflection
 data class RawgGenreResponse(
-    val name: String
+    val name: String,
 )

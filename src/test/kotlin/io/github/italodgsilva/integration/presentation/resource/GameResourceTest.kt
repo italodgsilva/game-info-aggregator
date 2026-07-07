@@ -10,19 +10,17 @@ import org.junit.jupiter.api.Test
 
 @QuarkusTest
 class GameResourceTest {
-
     @Test
     fun `must return game information`() {
-
         val gamesFaker = GamesFaker()
         val name = gamesFaker.game.title()
 
         given()
             .accept(MediaType.APPLICATION_JSON)
             .pathParam("name", name)
-        .`when`()
+            .`when`()
             .get("/games/{name}")
-        .then()
+            .then()
             .statusCode(Response.Status.OK.statusCode)
             .body("name", equalTo(name))
     }

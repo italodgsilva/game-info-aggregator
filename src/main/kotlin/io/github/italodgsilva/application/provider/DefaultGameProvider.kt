@@ -9,13 +9,13 @@ import jakarta.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class DefaultGameProvider(
     private val repository: GameRepository,
-    private val gateway: GameGateway
+    private val gateway: GameGateway,
 ) : GameProvider {
-
     override suspend fun findByName(name: String): Game? {
         // TODO melhorar na segunda fase.
         val game = gateway.find(name)
+        // TODO para passar no datekt
+        println(repository)
         return game
     }
-
 }

@@ -9,6 +9,5 @@ import jakarta.enterprise.context.ApplicationScoped
 @Mock
 @ApplicationScoped
 class FakeGameGateway : GameGateway {
-    override suspend fun find(name: String): Game? =
-        GameFactory.create(name = name)
+    override suspend fun find(name: String): Game? = GameFactory.create(name = name)
 }

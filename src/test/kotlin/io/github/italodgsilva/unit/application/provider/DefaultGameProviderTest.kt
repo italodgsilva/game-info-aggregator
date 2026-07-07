@@ -13,50 +13,48 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertNull
 
 class DefaultGameProviderTest {
-
     private val repository = mockk<GameRepository>()
     private val gateway = mockk<GameGateway>()
 
     @Test
-    fun `must provide a game by name when it found`() = runTest {
+    fun `must provide a game by name when it found`() =
+        runTest {
+            val game = GameFactory.create()
 
-        val game = GameFactory.create()
+            // TODO Quando implementarmos o repositório, devemos definir o comportamento dele aqui
+            coEvery {
+                gateway.find(game.name)
+            } returns game
 
-        // TODO Quando implementarmos o repositório, devemos definir o comportamento dele aqui
-        coEvery {
-            gateway.find(game.name)
-        } returns game
+            val provider = DefaultGameProvider(repository, gateway)
+            val foundGame = provider.findByName(game.name)
 
-        val provider = DefaultGameProvider(repository, gateway)
-        val foundGame = provider.findByName(game.name)
+            assertEquals(foundGame, game)
 
-        assertEquals(foundGame, game)
-
-        coVerify(exactly = 1) {
-            // TODO implementar para repository futuramente
-            gateway.find(game.name)
+            coVerify(exactly = 1) {
+                // TODO implementar para repository futuramente
+                gateway.find(game.name)
+            }
         }
-
-    }
 
     @Test
-    fun `must return null when game is not found`() = runTest {
-        val gameName = "Nonexistent Game"
+    fun `must return null when game is not found`() =
+        runTest {
+            val gameName = "Nonexistent Game"
 
-        // TODO Quando implementarmos o repositório, devemos definir o comportamento dele aqui
-        coEvery {
-            gateway.find(gameName)
-        } returns null
+            // TODO Quando implementarmos o repositório, devemos definir o comportamento dele aqui
+            coEvery {
+                gateway.find(gameName)
+            } returns null
 
-        val provider = DefaultGameProvider(repository, gateway)
-        val foundGame = provider.findByName(gameName)
+            val provider = DefaultGameProvider(repository, gateway)
+            val foundGame = provider.findByName(gameName)
 
-        assertNull(foundGame)
+            assertNull(foundGame)
 
-        coVerify(exactly = 1) {
-            // TODO implementar para repository futuramente
-            gateway.find(gameName)
+            coVerify(exactly = 1) {
+                // TODO implementar para repository futuramente
+                gateway.find(gameName)
+            }
         }
-
-    }
 }

@@ -7,20 +7,20 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class RawgMapperTest {
-
     @Test
     fun `must map a rawg response to a game entity`() {
-
         val genres = listOf("action", "adventure")
 
-        val rawgGameResponse = RawgGameResponse(
-            name = "Elden Ring",
-            description = "Description of Elden Ring",
-            genres = listOf(
-                RawgGenreResponse(name = genres[0]),
-                RawgGenreResponse(name = genres[1])
+        val rawgGameResponse =
+            RawgGameResponse(
+                name = "Elden Ring",
+                description = "Description of Elden Ring",
+                genres =
+                    listOf(
+                        RawgGenreResponse(name = genres[0]),
+                        RawgGenreResponse(name = genres[1]),
+                    ),
             )
-        )
 
         val game = RawgMapper.toDomain(rawgGameResponse)
 
@@ -33,14 +33,16 @@ class RawgMapperTest {
     fun `must map a rawg response to a game entity without description`() {
         val genres = listOf("action", "adventure")
 
-        val rawgGameResponse = RawgGameResponse(
-            name = "Elden Ring",
-            description = null,
-            genres = listOf(
-                RawgGenreResponse(genres[0]),
-                RawgGenreResponse(genres[1])
+        val rawgGameResponse =
+            RawgGameResponse(
+                name = "Elden Ring",
+                description = null,
+                genres =
+                    listOf(
+                        RawgGenreResponse(genres[0]),
+                        RawgGenreResponse(genres[1]),
+                    ),
             )
-        )
 
         val game = RawgMapper.toDomain(rawgGameResponse)
 
@@ -51,12 +53,12 @@ class RawgMapperTest {
 
     @Test
     fun `must map a rawg response to a game entity without genres`() {
-
-        val rawgGameResponse = RawgGameResponse(
-            name = "Elden Ring",
-            description = "Description of Elden Ring",
-            genres = emptyList()
-        )
+        val rawgGameResponse =
+            RawgGameResponse(
+                name = "Elden Ring",
+                description = "Description of Elden Ring",
+                genres = emptyList(),
+            )
 
         val game = RawgMapper.toDomain(rawgGameResponse)
 

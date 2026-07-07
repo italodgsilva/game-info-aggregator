@@ -1,7 +1,7 @@
 package io.github.italodgsilva.domain.exception
 
 class GameNotFoundException(
-    gameName: String
+    gameName: String,
 ) : DomainException(
-    message = "Game '$gameName' not found.",
-)
+        message = "Game '$gameName' not found.",
+    )

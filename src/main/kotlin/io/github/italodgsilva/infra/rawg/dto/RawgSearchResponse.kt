@@ -4,5 +4,5 @@ import io.quarkus.runtime.annotations.RegisterForReflection
 
 @RegisterForReflection
 data class RawgSearchResponse(
-    val results: List<RawgGameResponse> = emptyList()
+    val results: List<RawgGameResponse> = emptyList(),
 )

@@ -1,5 +1,3 @@
 package io.github.italodgsilva.domain.service
 
-interface DomainService {
-
-}
+interface DomainService

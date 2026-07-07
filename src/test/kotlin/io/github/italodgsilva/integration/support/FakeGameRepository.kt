@@ -6,5 +6,4 @@ import jakarta.enterprise.context.ApplicationScoped
 
 @Mock
 @ApplicationScoped
-class FakeGameRepository : GameRepository {
-}
+class FakeGameRepository : GameRepository

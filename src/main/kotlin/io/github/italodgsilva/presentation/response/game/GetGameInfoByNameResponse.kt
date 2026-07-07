@@ -7,5 +7,5 @@ import io.quarkus.runtime.annotations.RegisterForReflection
 data class GetGameInfoByNameResponse(
     val name: String,
     val description: String,
-    val genres: List<String> = emptyList()
+    val genres: List<String> = emptyList(),
 ) : Response

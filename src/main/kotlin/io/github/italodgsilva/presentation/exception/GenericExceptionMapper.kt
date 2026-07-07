@@ -8,9 +8,10 @@ import jakarta.ws.rs.ext.Provider
 
 @Provider
 class GenericExceptionMapper : ExceptionMapper<Throwable> {
-    override fun toResponse(exception: Throwable): Response = Response
-        .serverError()
-        .entity(ErrorResponse(Response.Status.INTERNAL_SERVER_ERROR.statusCode, "Internal server error."))
-        .type(MediaType.APPLICATION_JSON)
-        .build()
+    override fun toResponse(exception: Throwable): Response =
+        Response
+            .serverError()
+            .entity(ErrorResponse(Response.Status.INTERNAL_SERVER_ERROR.statusCode, "Internal server error."))
+            .type(MediaType.APPLICATION_JSON)
+            .build()
 }

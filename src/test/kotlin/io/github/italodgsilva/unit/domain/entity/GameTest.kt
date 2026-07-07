@@ -3,10 +3,9 @@ package io.github.italodgsilva.unit.domain.entity
 import io.github.italodgsilva.domain.entity.Game
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import java.util.*
+import java.util.UUID
 
 class GameTest {
-
     @Test
     fun `must create a game`() {
         val genres = listOf("adventure", "action", "FPS")
@@ -16,5 +15,4 @@ class GameTest {
         Assertions.assertEquals(game.description, "description")
         Assertions.assertEquals(game.name, "Game")
     }
-
 }

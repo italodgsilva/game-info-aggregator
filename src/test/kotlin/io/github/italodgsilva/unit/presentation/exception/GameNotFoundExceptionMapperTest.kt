@@ -8,12 +8,10 @@ import jakarta.ws.rs.core.Response
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-
 class GameNotFoundExceptionMapperTest {
-
     @Test
     fun `must map an exception to response`() {
-        val exception = GameNotFoundException(gameName="Game Name")
+        val exception = GameNotFoundException(gameName = "Game Name")
         val response = GameNotFoundExceptionMapper().toResponse(exception)
         val responseEntity = response.entity as ErrorResponse
         assertEquals(Response.Status.NOT_FOUND.statusCode, response.status)
@@ -21,5 +19,4 @@ class GameNotFoundExceptionMapperTest {
         assertEquals(exception.message, responseEntity.message)
         assertEquals(MediaType.APPLICATION_JSON_TYPE, response.mediaType)
     }
-
 }

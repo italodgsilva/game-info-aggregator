@@ -12,10 +12,8 @@ import org.eclipse.microprofile.rest.client.inject.RestClient
 class RawgGameGateway(
     @RestClient
     private val client: RawgApiClient,
-
     @ConfigProperty(name = "rawg.api-key")
-    private val apiKey: String
-
+    private val apiKey: String,
 ) : GameGateway {
     override suspend fun find(name: String): Game? {
         val response = client.search(name, this.apiKey)

@@ -6,5 +6,5 @@ import io.quarkus.runtime.annotations.RegisterForReflection
 data class RawgGameResponse(
     val name: String,
     val description: String?,
-    val genres: List<RawgGenreResponse> = emptyList()
+    val genres: List<RawgGenreResponse> = emptyList(),
 )

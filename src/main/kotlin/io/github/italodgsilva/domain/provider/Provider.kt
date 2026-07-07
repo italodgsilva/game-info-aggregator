@@ -1,4 +1,3 @@
 package io.github.italodgsilva.domain.provider
 
-interface Provider {
-}
+interface Provider
