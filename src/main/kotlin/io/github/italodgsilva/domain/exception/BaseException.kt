@@ -1,5 +1,5 @@
 package io.github.italodgsilva.domain.exception
 
-abstract class DomainException(
+abstract class BaseException(
     override val message: String,
-) : RuntimeException(message)
+) : Exception(message)

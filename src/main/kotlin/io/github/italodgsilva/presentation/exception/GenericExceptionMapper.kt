@@ -11,7 +11,7 @@ class GenericExceptionMapper : ExceptionMapper<Throwable> {
     override fun toResponse(exception: Throwable): Response =
         Response
             .serverError()
-            .entity(ErrorResponse(Response.Status.INTERNAL_SERVER_ERROR.statusCode, "Internal server error."))
+            .entity(ErrorResponse(Response.Status.INTERNAL_SERVER_ERROR.statusCode, exception.message.orEmpty()))
             .type(MediaType.APPLICATION_JSON)
             .build()
 }

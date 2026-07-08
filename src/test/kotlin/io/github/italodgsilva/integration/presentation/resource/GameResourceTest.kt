@@ -6,6 +6,7 @@ import io.restassured.RestAssured.given
 import jakarta.ws.rs.core.MediaType
 import jakarta.ws.rs.core.Response
 import org.hamcrest.Matchers.equalTo
+import org.hamcrest.Matchers.hasSize
 import org.junit.jupiter.api.Test
 
 @QuarkusTest
@@ -22,6 +23,7 @@ class GameResourceTest {
             .get("/games/{name}")
             .then()
             .statusCode(Response.Status.OK.statusCode)
-            .body("name", equalTo(name))
+            .body("results", hasSize<Any>(1))
+            .body("results[0].name", equalTo(name))
     }
 }
