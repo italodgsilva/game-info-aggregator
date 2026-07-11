@@ -1,6 +1,7 @@
 package io.github.italodgsilva.unit.infra.rawg.gateway
 
 import io.github.italodgsilva.application.logger.Logger
+import io.github.italodgsilva.application.logger.LoggerFactory
 import io.github.italodgsilva.domain.exception.GameGatewayTimeoutException
 import io.github.italodgsilva.domain.exception.TimeoutException
 import io.github.italodgsilva.infra.rawg.client.RawgApiClient
@@ -20,16 +21,18 @@ import org.junit.jupiter.api.Test
 class RawgGameGatewayTest {
     private val client = mockk<RawgApiClient>()
     private val logger = mockk<Logger>(relaxed = true)
+    private val loggerFactory = mockk<LoggerFactory>()
     private val gamesFaker = GamesFaker()
     private val apiKey = "test-api-key"
 
     @Test
     fun `must find a game from rawg successfully`() =
         runTest {
+            coEvery { loggerFactory.getLogger(any()) } returns logger
             val gameName = gamesFaker.game.title()
             val response = RawgSearchResponseFactory.create()
             val retriableExceptionConverter = mockk<RetriableExceptionConverter>()
-            val retryExecutor = RetryExecutor(logger, retriableExceptionConverter)
+            val retryExecutor = RetryExecutor(loggerFactory, retriableExceptionConverter)
 
             coEvery {
                 client.search(gameName, apiKey)
@@ -39,7 +42,7 @@ class RawgGameGatewayTest {
                 RawgGameGateway(
                     retryExecutor = retryExecutor,
                     client = client,
-                    logger = logger,
+                    loggerFactory = loggerFactory,
                     apiKey = apiKey,
                     maxAttempts = 3,
                     retryDelay = 1000,
@@ -54,6 +57,7 @@ class RawgGameGatewayTest {
     @Test
     fun `must throw a gateway timeout error`() =
         runTest {
+            coEvery { loggerFactory.getLogger(any()) } returns logger
             val gameName = gamesFaker.game.title()
             val retryExecutor = mockk<RetryExecutor>()
             coEvery {
@@ -63,7 +67,7 @@ class RawgGameGatewayTest {
                 RawgGameGateway(
                     retryExecutor = retryExecutor,
                     client = client,
-                    logger = logger,
+                    loggerFactory = loggerFactory,
                     apiKey = apiKey,
                     maxAttempts = 3,
                     retryDelay = 1000,

@@ -1,6 +1,6 @@
 package io.github.italodgsilva.infra.rawg.gateway
 
-import io.github.italodgsilva.application.logger.Logger
+import io.github.italodgsilva.application.logger.LoggerFactory
 import io.github.italodgsilva.domain.entity.Game
 import io.github.italodgsilva.domain.exception.GameGatewayTimeoutException
 import io.github.italodgsilva.domain.exception.TimeoutException
@@ -23,8 +23,10 @@ class RawgGameGateway(
     @ConfigProperty(name = "rawg.retry-delay")
     private val retryDelay: Int,
     private val retryExecutor: RetryExecutor,
-    private val logger: Logger,
+    private val loggerFactory: LoggerFactory,
 ) : GameProvider {
+    private val logger = this.loggerFactory.getLogger(RawgGameGateway::class.java)
+
     override suspend fun find(name: String): List<Game> {
         val response =
             try {

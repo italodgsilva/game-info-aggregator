@@ -1,15 +1,17 @@
 package io.github.italodgsilva.infra.retry
 
-import io.github.italodgsilva.application.logger.Logger
+import io.github.italodgsilva.application.logger.LoggerFactory
 import jakarta.enterprise.context.ApplicationScoped
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
 @ApplicationScoped
 class RetryExecutor(
-    private val logger: Logger,
+    private val loggerFactory: LoggerFactory,
     private val retriableExceptionConverter: RetriableExceptionConverter,
 ) {
+    private val logger = this.loggerFactory.getLogger(RetryExecutor::class.java)
+
     @Suppress("TooGenericExceptionCaught")
     suspend fun <T> execute(
         maxAttempts: Int,

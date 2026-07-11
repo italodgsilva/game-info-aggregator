@@ -1,13 +1,11 @@
 package io.github.italodgsilva.infra.logger
 
-import jakarta.enterprise.context.ApplicationScoped
 import org.jboss.logging.Logger
 import io.github.italodgsilva.application.logger.Logger as ApplicationLogger
 
-@ApplicationScoped
-class JBossLogger : ApplicationLogger {
-    private val logger = Logger.getLogger(JBossLogger::class.java)
-
+class JBossLogger(
+    private val logger: Logger,
+) : ApplicationLogger {
     override fun info(
         message: String,
         vararg args: Any?,
