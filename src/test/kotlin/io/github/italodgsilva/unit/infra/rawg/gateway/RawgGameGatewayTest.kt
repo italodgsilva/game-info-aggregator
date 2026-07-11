@@ -5,6 +5,7 @@ import io.github.italodgsilva.domain.exception.GameGatewayTimeoutException
 import io.github.italodgsilva.domain.exception.TimeoutException
 import io.github.italodgsilva.infra.rawg.client.RawgApiClient
 import io.github.italodgsilva.infra.rawg.gateway.RawgGameGateway
+import io.github.italodgsilva.infra.retry.RetriableExceptionConverter
 import io.github.italodgsilva.infra.retry.RetryExecutor
 import io.github.italodgsilva.support.factory.RawgSearchResponseFactory
 import io.github.serpro69.kfaker.games.GamesFaker
@@ -27,7 +28,8 @@ class RawgGameGatewayTest {
         runTest {
             val gameName = gamesFaker.game.title()
             val response = RawgSearchResponseFactory.create()
-            val retryExecutor = RetryExecutor(logger)
+            val retriableExceptionConverter = mockk<RetriableExceptionConverter>()
+            val retryExecutor = RetryExecutor(logger, retriableExceptionConverter)
 
             coEvery {
                 client.search(gameName, apiKey)
