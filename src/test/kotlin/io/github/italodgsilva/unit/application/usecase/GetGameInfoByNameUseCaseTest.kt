@@ -10,7 +10,6 @@ import io.github.italodgsilva.support.factory.GameFactory
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -61,9 +60,7 @@ class GetGameInfoByNameUseCaseTest {
             } returns listOf(provider)
 
             assertThrows<GameNotFoundException> {
-                runBlocking {
-                    useCase.execute(GetGameInfoByNameInput(gameName))
-                }
+                useCase.execute(GetGameInfoByNameInput(gameName))
             }
 
             coVerify(exactly = 1) {

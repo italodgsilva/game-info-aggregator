@@ -2,14 +2,12 @@ package io.github.italodgsilva.infra.rawg.gateway
 
 import io.github.italodgsilva.application.logger.Logger
 import io.github.italodgsilva.domain.entity.Game
-import io.github.italodgsilva.domain.exception.GameGatewayConnectionTimeoutException
-import io.github.italodgsilva.domain.exception.GameGatewayResponseTimeoutException
+import io.github.italodgsilva.domain.exception.GameGatewayTimeoutException
+import io.github.italodgsilva.domain.exception.TimeoutException
 import io.github.italodgsilva.domain.provider.GameProvider
 import io.github.italodgsilva.infra.rawg.client.RawgApiClient
 import io.github.italodgsilva.infra.rawg.mapper.RawgMapper
 import io.github.italodgsilva.infra.retry.RetryExecutor
-import io.netty.channel.ConnectTimeoutException
-import io.vertx.core.impl.NoStackTraceTimeoutException
 import jakarta.enterprise.context.ApplicationScoped
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.eclipse.microprofile.rest.client.inject.RestClient
@@ -36,12 +34,9 @@ class RawgGameGateway(
                 ) {
                     client.search(name, this.apiKey)
                 }
-            } catch (_: ConnectTimeoutException) {
+            } catch (_: TimeoutException) {
                 logger.error("Could not connect to RAWG API.")
-                throw GameGatewayResponseTimeoutException("RAWG")
-            } catch (_: NoStackTraceTimeoutException) {
-                logger.error("Could not receive response from RAWG API.")
-                throw GameGatewayConnectionTimeoutException("RAWG")
+                throw GameGatewayTimeoutException("RAWG")
             }
         return response.results.map { RawgMapper.toDomain(it) }
     }

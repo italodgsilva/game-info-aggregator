@@ -1,6 +1,6 @@
 package io.github.italodgsilva.domain.exception
 
-class GameGatewayConnectionTimeoutException(
+class GameGatewayTimeoutException(
     gateway: String,
 ) : BaseException(
         message = "Game gateway '$gateway' did not connected in time.",
