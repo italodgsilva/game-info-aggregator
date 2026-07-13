@@ -1,15 +1,15 @@
 package io.github.italodgsilva.unit.infra.logger
 
-import io.github.italodgsilva.infra.logger.toMessageFormat
+import io.github.italodgsilva.infra.logger.LoggerMessageFormatter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class JBossLoggerTest {
+class LoggerMessageFormatterTest {
     @Test
     fun `should keep message unchanged when there are no placeholders`() {
         assertEquals(
             "Application started",
-            "Application started".toMessageFormat(),
+            LoggerMessageFormatter.format("Application started"),
         )
     }
 
@@ -17,7 +17,7 @@ class JBossLoggerTest {
     fun `should convert one placeholder`() {
         assertEquals(
             "Game {0}",
-            "Game {}".toMessageFormat(),
+            LoggerMessageFormatter.format("Game {}"),
         )
     }
 
@@ -25,7 +25,7 @@ class JBossLoggerTest {
     fun `should convert multiple placeholders`() {
         assertEquals(
             "Game {0} loaded from {1}",
-            "Game {} loaded from {}".toMessageFormat(),
+            LoggerMessageFormatter.format("Game {} loaded from {}"),
         )
     }
 
@@ -33,7 +33,7 @@ class JBossLoggerTest {
     fun `should convert sequential placeholders`() {
         assertEquals(
             "{0} {1} {2}",
-            "{} {} {}".toMessageFormat(),
+            LoggerMessageFormatter.format("{} {} {}"),
         )
     }
 
@@ -41,7 +41,7 @@ class JBossLoggerTest {
     fun `should preserve surrounding text`() {
         assertEquals(
             "Error {0}: {1}",
-            "Error {}: {}".toMessageFormat(),
+            LoggerMessageFormatter.format("Error {}: {}"),
         )
     }
 
@@ -49,7 +49,7 @@ class JBossLoggerTest {
     fun `should return empty string`() {
         assertEquals(
             "",
-            "".toMessageFormat(),
+            LoggerMessageFormatter.format(""),
         )
     }
 }
