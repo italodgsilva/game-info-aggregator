@@ -7,4 +7,5 @@ data class Game(
     val name: String,
     val description: String,
     val genres: List<String>,
+    val cheapest: Float? = null,
 ) : Entity

@@ -3,6 +3,14 @@ package io.github.italodgsilva.infra.logger
 import org.jboss.logging.Logger
 import io.github.italodgsilva.application.logger.Logger as ApplicationLogger
 
+internal fun String.toMessageFormat(): String {
+    var index = 0
+
+    return replace(Regex("""\{\}""")) {
+        "{${index++}}"
+    }
+}
+
 class JBossLogger(
     private val logger: Logger,
 ) : ApplicationLogger {
@@ -26,13 +34,5 @@ class JBossLogger(
         vararg args: Any?,
     ) {
         logger.errorv(message.toMessageFormat(), throwable, *args)
-    }
-
-    private fun String.toMessageFormat(): String {
-        var index = 0
-
-        return replace(Regex("""\{\}""")) {
-            "{${index++}}"
-        }
     }
 }
